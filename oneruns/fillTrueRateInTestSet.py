@@ -1,5 +1,6 @@
 import csv, pdb
 import mysql.connector
+import random
 
 """
 connecting the database...
@@ -14,7 +15,10 @@ ins.next() # ignore the first line
 out = csv.writer(outfile)
 out.writerow(['movie_id','user_id','actual_rate']) # set up the first line
 
+count = 0
 for row in ins:
+    if count >= 100000: break
+    if random.random() > 0.07:continue
     mid = int(row[0])
     uid = int(row[1])
     query = 'select rating from ratings where movie_id = %d and user_id = %d' % (mid,uid)
@@ -22,6 +26,7 @@ for row in ins:
     for x in cursor:
         rate = float(x[0])
     out.writerow([mid,uid,rate])
+    count += 1
 
 """
 closing the obejctives

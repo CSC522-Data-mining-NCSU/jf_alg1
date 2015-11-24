@@ -2,12 +2,13 @@ import csv,pdb
 import mysql.connector
 import random
 
-Movie2test = []
+Movie2test = range(1,17771)
+"""
 for i in range(100):
     m = random.randint(1,14000)
     if m not in Movie2test: Movie2test.append(m)
 Movie2test = sorted(Movie2test)
-
+"""
 """
 connecting the database...
 """
@@ -21,6 +22,7 @@ infile = open('../probe.txt','r')
 
 recording = False
 mid = 0
+
 for line in infile:
     if line[-2]==':':
         if int(line[:-2]) in Movie2test:
